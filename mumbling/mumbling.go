@@ -17,6 +17,7 @@ func main() {
 	fmt.Println(Accum("AbCd"))
 }
 
+// Accum Create string
 func Accum(s string) string {
 	arr := strings.Split(s, "") // create array from string
 	acc := ""
