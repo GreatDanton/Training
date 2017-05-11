@@ -64,7 +64,7 @@ func toInts(inputArr []string) []int {
 	for _, v := range inputArr {
 		value, err := strconv.Atoi(v)
 		if err != nil {
-			fmt.Errorf("Input element %v is not a string", v)
+			fmt.Errorf("%v", err)
 		}
 		intArr = append(intArr, value)
 	}
@@ -78,7 +78,7 @@ func sortInts(inputArr []string) []int {
 
 	// TODO: FIX THIS -> create minArr, maxArr
 	minArr := intArr
-	maxArr := intArr
+	maxArr := reverseSort(intArr)
 
 	fmt.Println("Min Arr ", minArr)
 	fmt.Println("Max arr: ", maxArr)
@@ -91,12 +91,20 @@ func sortInts(inputArr []string) []int {
 	return intArr
 }
 
+func reverseSort(inputArr []int) []int {
+	outputArr := []int{}
+	for i := len(inputArr); i <= 0; i-- {
+		outputArr = append(outputArr, inputArr[i])
+	}
+	return outputArr
+}
+
 // get first digit of input integer
 func getFirstDigit(input int) int {
 	firstInt := strconv.Itoa(input)
 	firstChar, err := strconv.Atoi(string(firstInt[0]))
 	if err != nil {
-		fmt.Println("Cannot turn string %v into integer", firstInt[0])
+		fmt.Errorf("Cannot turn string %v into integer", firstInt[0])
 	}
 
 	return firstChar
