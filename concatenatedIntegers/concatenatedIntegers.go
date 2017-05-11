@@ -74,11 +74,14 @@ func toInts(inputArr []string) []int {
 // sorts according to the challenge input (from min to max, no starting with 0)
 func sortInts(inputArr []string) []int {
 	intArr := toInts(inputArr)
-	sort.Ints(intArr[:])
-
-	// TODO: FIX THIS -> create minArr, maxArr
-	minArr := intArr
-	maxArr := reverseSort(intArr)
+	// sorting arrays min goes from min->max number
+	// 				  max goes from max->min number
+	minArr := make([]int, len(intArr))
+	maxArr := make([]int, len(intArr))
+	copy(minArr, intArr)
+	copy(maxArr, intArr)
+	sort.Ints(minArr)
+	sort.Sort(sort.Reverse(sort.IntSlice(maxArr)))
 
 	fmt.Println("Min Arr ", minArr)
 	fmt.Println("Max arr: ", maxArr)
