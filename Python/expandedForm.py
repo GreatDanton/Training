@@ -36,32 +36,9 @@ def find_uniq(arr):
 # signature - first three numbers
 # n - return first n items from tribonnaci sequence
 def tribonnaci(signature, n):
-    if n == 0:
-        return([])
-    elif n <= 3:
-        return(signature[:n])
-
-    arr = signature
-    return(tribonacci_sum(arr, n))
-
-# another solution with while loop
-'''     i = 0
-    while len(arr) < n:
-        sum = arr[i] + arr[i+1] + arr[i+2]
-        arr.append(sum)
-        i += 1
-    return arr
-'''
-
-
-# recursive call
-def tribonacci_sum(arr,n):
-    if n == 3:
-        return(arr)
-    sum = arr[-1] + arr[-2] + arr[-3]
-    arr.append(sum)
-    return (tribonacci_sum(arr, n-1))
-
+    while len(signature) < n:
+        signature.append(sum(signature[-3:]))
+    return signature[:n]
 
 t = tribonnaci([1,1,1], 10)
 print(t)
