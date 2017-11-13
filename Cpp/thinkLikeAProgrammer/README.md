@@ -1,0 +1,1 @@
+Solved exercises from Think like a programmer - an introduction to creative problem solving book
