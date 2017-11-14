@@ -7,8 +7,8 @@
  *   grade, and then try it again using the student ID.
  */
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 struct student {
     int grade;
@@ -20,9 +20,7 @@ bool idSort(student const &A, student const &B) {
     return A.studentID > B.studentID;
 }
 
-bool gradeSort(student const &A, student const &B) {
-    return A.grade > B.grade;
-}
+bool gradeSort(student const &A, student const &B) { return A.grade > B.grade; }
 
 int main() {
     const int ARRAY_SIZE = 10;
@@ -56,7 +54,6 @@ int main() {
         std::cout << studentArray[i].grade << '\t' << studentArray[i].studentID
                   << '\t' << studentArray[i].name << '\n';
     }
-
 
     return 0;
 }
