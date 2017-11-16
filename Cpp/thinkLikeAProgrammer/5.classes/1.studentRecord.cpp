@@ -10,27 +10,7 @@
  * shown in table 5-1.
  *
  */
-#include <iostream>
-
-class studentRecord {
-   public:
-    studentRecord();
-    studentRecord(int newGrade, int newID, std::string newName);
-    int grade();
-    void setGrade(int newGrade);
-    int studentID();
-    void setStudentID(int newID);
-    std::string name();
-    void setName(std::string newName);
-
-    std::string letterGrade();
-
-   private:
-    int _grade;
-    int _studentID;
-    std::string _name;
-    bool isValidGrade(int grade);
-};
+#include "1.studentRecord.h"
 
 // constructors
 studentRecord::studentRecord() {
@@ -88,9 +68,4 @@ bool studentRecord::isValidGrade(int grade) {
     } else {
         return false;
     }
-}
-
-int main() {
-    //
-    return 0;
 }
