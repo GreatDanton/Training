@@ -17,6 +17,14 @@
  * s1. That is, the function should not simply point the 'next' field of the
  * last node in s1's list to the first node of s2's list
  *
+ *
+ * Exercise 4.8
+ *
+ * Add a function to the linked-list string implementation called removeChars to
+ * remove a section of characters from a string based on the position and
+ * length. For example, removeChars(s1, 5, 3) would remove the three characters
+ * starting at the fifth character in the string. Make sure the removed nodes
+ * are properly deallocated.
  */
 #include <iostream>
 
@@ -135,6 +143,46 @@ void concatenateTester() {
     delete[] c1;
 }
 
+void removeNodes(charCollection &cc, int index, int length) {
+    stringNode *loopPtr = cc;
+    stringNode *nodeBeforeRemove = new stringNode;
+    stringNode *tmp = new stringNode;
+    int loopCounter = 0;
+    int removeCounter = 1;
+
+    while (loopPtr != NULL) {
+        // start removing elements
+        if (loopCounter >= index) {
+            // if we are removing first element, set collection to next field
+            if (loopCounter == 0) {
+                cc = loopPtr->next;
+            }
+
+            // we removed enough elements set next field in nodeBeforeRemove
+            // and finish the loop
+            if (removeCounter >= length) {
+                nodeBeforeRemove->next = loopPtr->next;
+                delete[] loopPtr;
+                loopPtr = NULL;
+                break;
+            }
+            // remove node
+            tmp = loopPtr;
+            delete[] loopPtr;
+            loopPtr = NULL;
+            loopPtr = tmp;
+            removeCounter++;
+        } else {
+            nodeBeforeRemove = loopPtr;
+        }
+        // next iteration
+        loopCounter++;
+        loopPtr = loopPtr->next;
+    }
+    delete[] tmp;
+    tmp = NULL;
+}
+
 int main() {
     charCollection cc;
 
@@ -159,6 +207,9 @@ int main() {
               << std::endl;
 
     concatenateTester();
+    std::cout << "remove nodes" << std::endl;
+    removeNodes(cc, 1, 2);
+    displayNodes(cc);
 
     return 0;
 }
