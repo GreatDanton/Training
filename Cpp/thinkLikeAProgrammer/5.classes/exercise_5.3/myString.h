@@ -14,6 +14,7 @@ class myString {
     myString(const myString &original);
     // operator overload
     myString &operator=(const myString &rhs);
+    char operator[](int index);
     void append(char c);
     char characterAt(int index);
     void displayString();

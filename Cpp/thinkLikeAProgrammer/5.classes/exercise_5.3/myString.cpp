@@ -72,3 +72,13 @@ myString &myString::operator=(const myString &rhs) {
     }
     return *this;
 }
+
+char myString::operator[](int index) {
+    if (index > -1) {
+        int len = length(_string);
+        if (index > len) {
+            return '?';
+        }
+        return _string[index];
+    }
+}
