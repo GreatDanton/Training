@@ -14,6 +14,14 @@
  * myString is an object of our class, then myString[1] should return the same
  * result as myString.characterAt(1)
  *
+ *
+ * Exercise 5.5:
+ *
+ * For the variable-length string class of the previous exercises, add a remove
+ * method that takes a starting position and a number of characters and removes
+ * that many characters from the middle of the string. So myString.remove(5,3)
+ * would remove three characters starting at the fifth position. Make sure your
+ * method behaves when the value of either of the parameters is invalid
  */
 
 #include "myString.h"
@@ -78,6 +86,36 @@ void overloadBracketsTester() {
     std::cout << myChar4 << std::endl;
 }
 
+void removeTester() {
+    std::cout << "### Remove characters tester " << std::endl;
+    arrayString a = new char[4]{'A', 'B', 'C', 0};
+    myString str(a);
+    str.characterAt(0);
+    str.remove(0, 1);
+    if (str.characterAt(0) == 'B') {
+        std::cout << "str.remove(0,1) works correctly" << std::endl;
+    }
+
+    std::cout << "Second delete" << std::endl;
+    str.remove(4, 1);
+    std::cout << "Expected: BC"
+              << " returned: " << std::endl;
+    str.displayString();
+
+    str.remove(-1, 10);
+    std::cout << "Expected: BC"
+              << " returned: " << std::endl;
+    str.displayString();
+
+    str.remove(1, 4);
+    std::cout << "Expected: B"
+              << " returned: " << std::endl;
+    str.displayString();
+
+    delete[] a;
+    a = nullptr;
+}
+
 int main() {
     classTester();
     std::cout << std::endl;
@@ -88,5 +126,8 @@ int main() {
     overloadedOperatorTester();
     std::cout << std::endl;
     overloadBracketsTester();
+    std::cout << std::endl;
+    removeTester();
+    std::cout << std::endl;
     return 0;
 }

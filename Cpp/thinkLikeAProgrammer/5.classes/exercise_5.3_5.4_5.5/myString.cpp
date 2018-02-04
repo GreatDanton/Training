@@ -39,8 +39,40 @@ void myString::append(const char c) {
     _string = newS;
 }
 
+void myString::remove(int startPos, int numOfChars) {
+    int oldLen = length(_string);
+    // startPosition is invalid
+    if (startPos > oldLen || startPos < 0) {
+        return;
+    }
+
+    int newLen = oldLen - numOfChars;
+    int endPos = startPos + numOfChars - 1;
+
+    // check if we are removing more characters than length of the string
+    if (newLen <= 0) {
+        newLen = startPos + 2;
+    }
+
+    arrayString newS = new char[newLen];
+    int counter = 0;
+    for (int i = 0; i < oldLen; i++) {
+        if (i < startPos || i > endPos) {
+            newS[counter] = _string[i];
+            counter++;
+        }
+    }
+
+    if (newLen <= 0) {
+        newS[counter + 1] = 0;
+    }
+
+    delete[] _string;
+    _string = newS;
+}
+
 char myString::characterAt(int index) {
-    if (index > 0) {
+    if (index >= 0) {
         return _string[index];
     }
     return '?';

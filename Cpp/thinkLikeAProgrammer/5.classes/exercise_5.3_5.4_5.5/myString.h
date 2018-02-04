@@ -18,6 +18,7 @@ class myString {
     void append(char c);
     char characterAt(int index);
     void displayString();
+    void remove(int startPos, int numOfChars);
 
   private:
     arrayString _string;
