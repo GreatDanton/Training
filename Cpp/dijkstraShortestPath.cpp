@@ -27,12 +27,6 @@ const std::vector<std::vector<int64_t>> graph = {
     {0, 6, 0, 4, 0}  // vertex e distances
 };
 
-/** Contains distances from the starting point to the chosen vertex (index of the array represents vertex in the graph) */
-std::vector<int64_t> distances = {};
-
-/** Contains graph vertices that were already visited (set to true). Index of the array represents vertex in the graph)*/
-std::vector<bool> visited = {};
-
 /**
  * Print the end result:
  * vertex | distance from starting point
@@ -90,14 +84,12 @@ int64_t vertexWithMinDistance(std::vector<int64_t> &distances, std::vector<bool>
  * @param visited - contains info about visited state of each graph vertex
  * @param startingVertex - index of the starting graph vertex
  */
-void initialize(int64_t graphSize, std::vector<int64_t> &distances, std::vector<bool> &visited, int64_t startingVertex)
+void initialize(std::vector<int64_t> &distances, std::vector<bool> &visited, int64_t startingVertex)
 {
-    for (size_t i = 0; i < graphSize; i++)
+    for (size_t i = 0; i < visited.size(); i++)
     {
-        // TODO: we can improve performance by initializing arrays of exact size we need,
-        // no need to resize vector every time
-        distances.push_back(std::numeric_limits<int64_t>::max());
-        visited.push_back(false);
+        distances.at(i) = std::numeric_limits<int64_t>::max();
+        visited.at(i) = false;
     }
 
     distances.at(startingVertex) = 0;
@@ -126,7 +118,12 @@ void dijkstra(const std::vector<std::vector<int64_t>> &graph, int64_t startingVe
         return;
     }
 
-    initialize(graph.size(), distances, visited, startingVertex);
+    /** Contains distances from the starting point to the chosen vertex (index of the array represents vertex in the graph) */
+    std::vector<int64_t> distances(graph.size());
+    /** Contains graph vertices that were already visited (set to true). Index of the array represents vertex in the graph)*/
+    std::vector<bool> visited(graph.size());
+
+    initialize(distances, visited, startingVertex);
 
     while (true)
     {
